@@ -1,0 +1,251 @@
+<!DOCTYPE HTML>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>graphs1090</title>
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<link rel="stylesheet" href="bootstrap.custom.light.css">
+		<link rel="stylesheet" href="portal.css">
+		<link rel="icon" type="image/png" href="graphs-favicon.png">
+		<meta name="apple-mobile-web-app-capable" content="yes">
+		<meta name="apple-mobile-web-app-status-bar-style" content="white">
+        <meta name="mobile-web-app-capable" content="yes">
+	</head>
+
+	<body>
+		<div class="container">
+			<h1>Performance Graphs</h1>
+            <div class="sticky-bar">
+                <div class="btn-group sticky-bar" role="group">
+                    <button type="button" id="btn-2h" class="btn btn-default btn-sm active" onclick="switchView('2h')">2 hours</button>
+                    <button type="button" id="btn-8h" class="btn btn-default btn-sm" onclick="switchView('8h')">8 hours</button>
+                    <button type="button" id="btn-24h" class="btn btn-default btn-sm" onclick="switchView('24h')">24 hours</button>
+                    <button type="button" id="btn-48h" class="btn btn-default btn-sm" onclick="switchView('48h')">48 hours</button>
+                    <button type="button" id="btn-7d" class="btn btn-default btn-sm" onclick="switchView('7d')">7 days</button>
+                    <button type="button" id="btn-14d" class="btn btn-default btn-sm" onclick="switchView('14d')">14 days</button>
+                    <button type="button" id="btn-30d" class="btn btn-default btn-sm" onclick="switchView('30d')">30 days</button>
+                    <button type="button" id="btn-90d" class="btn btn-default btn-sm" onclick="switchView('90d')">3 months</button>
+                    <button type="button" id="btn-180d" class="btn btn-default btn-sm" onclick="switchView('180d')">6 months</button>
+                    <button type="button" id="btn-365d" class="btn btn-default btn-sm" onclick="switchView('365d')">1 year</button>
+                    <button type="button" id="btn-730d" class="btn btn-default btn-sm" onclick="switchView('730d')">2 years</button>
+                    <button type="button" id="btn-1095d" class="btn btn-default btn-sm" onclick="switchView('1095d')">3 years</button>
+                    <button type="button" id="btn-1825d" class="btn btn-default btn-sm" onclick="switchView('1825d')">5 years</button>
+                    <button type="button" id="btn-3650d" class="btn btn-default btn-sm" onclick="switchView('3650d')">10 years</button>
+                    <button type="button" id="btn-crosshair" class="btn btn-default btn-sm" onclick="toggleCrosshair()">Crosshair</button>
+                </div>
+            </div>
+			<div class="padding"></div>
+			<!-- Dump1090 Graphs -->
+			<div id="panel_1090" style="display:block" class="panel panel-default">
+				<div class="panel-heading">ADS-B 1090 Graphs</div>
+				<div class="panel-body">
+					<div class="row">
+						<div class="column">
+							<a id ="dump1090-local_trailing_rate-link" href="#">
+								<img id="dump1090-local_trailing_rate-image" class="img-responsive" src="" alt="Message Rate (Trailing)">
+							</a>
+						</div>
+					</div>
+					<div class="row">
+						<div class="column">
+							<a id ="dump1090-aircraft-link" href="#">
+								<img id="dump1090-aircraft-image" class="img-responsive" src="" alt="Aircraft Seen">
+							</a>
+						</div>
+						<div class="column">
+							<a id ="dump1090-tracks-link" href="#">
+								<img id="dump1090-tracks-image" class="img-responsive" src="" alt="Tracks Seen">
+							</a>
+						</div>
+					</div>
+					<div class="row">
+
+						<div class="column text-center">
+							<a id ="dump1090-range-link" href="#">
+								<img id="dump1090-range-image" class="img-responsive" src="" alt="Max Range (Nautical Miles)">
+							</a>
+						</div>
+
+
+
+						<div class="column text-center">
+							<a id ="dump1090-signal-link" href="#">
+								<img id="dump1090-signal-image" class="img-responsive" src="" alt="Signal Level">
+							</a>
+						</div>
+					</div>
+					<div class="row">
+						<div class="column text-center">
+							<a id ="dump1090-local_rate-link" href="#">
+								<img id="dump1090-local_rate-image" class="img-responsive" src="" alt="Message Rate">
+							</a>
+						</div>
+						<div class="column text-center">
+							<a id ="dump1090-aircraft_message_rate-link" href="#">
+								<img id="dump1090-aircraft_message_rate-image" class="img-responsive" src="" alt="Aircraft Message Rate">
+							</a>
+						</div>
+					</div>
+					<div class="row">
+						<div class="column text-center">
+							<a id ="dump1090-cpu-link" href="#">
+								<img id="dump1090-cpu-image" class="img-responsive" src="" alt="CPU Utilization">
+							</a>
+						</div>
+                        <div class="column text-center">
+                            <a id ="dump1090-misc-link" href="#"> <!-- dump1090-misc -->
+								<img id="dump1090-misc-image" class="img-responsive" src="" alt="Misc">
+							</a>
+						</div>
+					</div>
+				</div>
+			</div>
+			<!-- Airspy Graphs -->
+			<div id="panel_airspy" class="panel panel-default" style="display:none"> <!-- airspy -->
+                <div class="panel-heading">Airspy Graphs</div>
+                <div class="panel-body">
+					<div class="row">
+						<div class="column text-center">
+							<a id ="airspy-rssi-link" href="#">
+								<img id="airspy-rssi-image" class="img-responsive" src="" alt="RSSI">
+							</a>
+						</div>
+						<div class="column text-center">
+							<a id ="airspy-snr-link" href="#">
+								<img id="airspy-snr-image" class="img-responsive" src="" alt="SNR">
+							</a>
+						</div>
+					</div>
+					<div class="row">
+						<div class="column text-center">
+							<a id ="airspy-noise-link" href="#">
+								<img id="airspy-noise-image" class="img-responsive" src="" alt="Noise">
+							</a>
+						</div>
+						<div class="column text-center">
+							<a id ="airspy-misc-link" href="#">
+								<img id="airspy-misc-image" class="img-responsive" src="" alt="Misc">
+							</a>
+						</div>
+					</div>
+					<div class="row">
+						<div class="column text-center">
+							<a id ="df_counts-link" href="#">
+								<img id="df_counts-image" class="img-responsive" src="" alt="DF Counts">
+							</a>
+						</div>
+					</div>
+				</div>
+			</div>
+			<!-- Dump978 Graphs -->
+			<div id="panel_978" class="panel panel-default" style="display:none"> <!-- dump978 -->
+				<div class="panel-heading">UAT 978 Graphs</div>
+				<div class="panel-body">
+					<div class="row">
+						<div class="column text-center">
+							<a id ="dump1090-messages_978-link" href="#">
+								<img id="dump1090-messages_978-image" class="img-responsive" src="" alt="UAT Message Rate">
+							</a>
+						</div>
+						<div class="column text-center">
+							<a id ="dump1090-aircraft_978-link" href="#">
+								<img id="dump1090-aircraft_978-image" class="img-responsive" src="" alt="UAT Aircraft">
+							</a>
+						</div>
+					</div>
+					<div class="row">
+						<div class="column text-center">
+							<a id ="dump1090-range_978-link" href="#">
+								<img id="dump1090-range_978-image" class="img-responsive" src="" alt="UAT Max Range">
+							</a>
+						</div>
+						<div class="column text-center">
+							<a id ="dump1090-signal_978-link" href="#">
+								<img id="dump1090-signal_978-image" class="img-responsive" src="" alt="UAT Signal Level">
+							</a>
+						</div>
+					</div>
+				</div>
+			</div>
+			<!-- System Graphs -->
+			<div id="panel_system" class="panel panel-default"> <!-- system -->
+				<div class="panel-heading">System Graphs</div>
+				<div class="panel-body">
+					<div class="row">
+						<div class="column text-center">
+							<a id ="system-cpu-link" href="#">
+								<img id="system-cpu-image" class="img-responsive" src="" alt="Overall CPU Utilization">
+							</a>
+						</div>
+					</div>
+					<div class="row">
+
+
+						<div class="column text-center">
+							<a id ="system-temperature-link" href="#">
+								<img id="system-temperature-image" class="img-responsive" src="" alt="Core Temperature">
+							</a>
+						</div>
+
+						<div class="column text-center">
+							<a id ="system-memory-link" href="#">
+								<img id="system-memory-image" class="img-responsive" src="" alt="Memory Utilization">
+							</a>
+						</div>
+					</div>
+					<div class="row">
+
+						<div class="column text-center">
+							<a id ="system-network_bandwidth-link" href="#">
+								<img id="system-network_bandwidth-image" class="img-responsive" src="" alt="Bandwidth Usage">
+							</a>
+						</div>
+
+						<div class="column text-center">
+							<a id ="system-df_root-link" href="#">
+								<img id="system-df_root-image" class="img-responsive" src="" alt="Disk Space Usage (/)">
+							</a>
+						</div>
+					</div>
+					<div class="row">
+						<div class="column text-center">
+							<a id ="system-disk_io_iops-link" href="#">
+								<img id="system-disk_io_iops-image" class="img-responsive" src="" alt="Disk I/O - IOPS">
+							</a>
+						</div>
+						<div class="column text-center">
+							<a id ="system-disk_io_octets-link" href="#">
+								<img id="system-disk_io_octets-image" class="img-responsive" src="" alt="Disk I/O - Bandwidth">
+							</a>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<div id="push"></div>
+		<footer id="footer">
+			<div class="container">
+				<p class="muted credits">
+				<a href="https://github.com/wiedehopf/graphs1090#graphs1090">graphs1090 on github</a>
+				</p>
+			</div>
+		</footer>
+
+
+		<div id="crosshair" class="cursor" style="display: none">
+			<div class="vt"></div>
+			<div class="hl"></div>
+		</div>
+
+		<script src="jquery-3.6.4.min.js"></script>
+		<script src="bootstrap.min.js"></script>
+
+		<script type="text/javascript">
+			$('#graphs-link').addClass("active");
+		</script>
+
+		<script src="graphs.js"></script>
+
+	</body>
+</html>

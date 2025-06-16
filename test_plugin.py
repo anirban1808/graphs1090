@@ -1,0 +1,3 @@
+import latency_ssid_monitor
+latency_ssid_monitor.init_callback()
+latency_ssid_monitor.read_callback()

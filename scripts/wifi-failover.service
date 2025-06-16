@@ -1,0 +1,21 @@
+[Unit]
+Description=Advanced WiFi Failover Service
+Wants=network-online.target wpa_supplicant.service
+After=network-online.target wpa_supplicant.service
+
+[Service]
+Type=simple
+ExecStart=/usr/bin/python3 /usr/local/bin/wifi-failover.py
+WorkingDirectory=/usr/local/bin
+Restart=always
+RestartSec=15s
+User=root
+# For systemd journal logging (recommended):
+StandardOutput=journal
+StandardError=journal
+# Alternatively, to append to specific files (less common for modern services):
+# StandardOutput=append:/var/log/wifi-failover_service_stdout.log
+# StandardError=append:/var/log/wifi-failover_service_stderr.log
+
+[Install]
+WantedBy=multi-user.target
